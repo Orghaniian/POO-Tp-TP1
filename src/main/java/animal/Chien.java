@@ -1,3 +1,5 @@
+package animal;
+
 public class Chien extends Animal{
 
     /**

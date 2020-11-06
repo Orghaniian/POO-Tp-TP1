@@ -1,3 +1,7 @@
+import animal.Chien;
+import animal.TypeAnimal;
+import exception.AnimalDansMauvaisSecteurException;
+import exception.LimiteVisiteurException;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

@@ -1,3 +1,7 @@
+import animal.Animal;
+import animal.TypeAnimal;
+import exception.AnimalDansMauvaisSecteurException;
+
 import java.util.ArrayList;
 import java.util.List;
 

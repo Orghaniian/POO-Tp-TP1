@@ -1,3 +1,5 @@
+package animal;
+
 public abstract class Animal {
     private String nomAnimal;
     private TypeAnimal typeAnimal;
@@ -32,7 +34,7 @@ public abstract class Animal {
 
     @Override
     public String toString() {
-        return "Animal{" +
+        return "animal.Animal{" +
                 "nomAnimal='" + nomAnimal + '\'' +
                 ", typeAnimal=" + typeAnimal +
                 '}';

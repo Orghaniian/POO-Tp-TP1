@@ -1,3 +1,9 @@
+import animal.Chat;
+import animal.Chien;
+import animal.TypeAnimal;
+import exception.AnimalDansMauvaisSecteurException;
+import exception.LimiteVisiteurException;
+
 public class App {
 
     public static void main(String[] args) {
@@ -7,13 +13,13 @@ public class App {
             zoo.nouvelAnimal(new Chat("minou"));
             zoo.nouvelAnimal(new Chien("Medor"));
         }catch (AnimalDansMauvaisSecteurException e){
-            System.out.println(e);
+            e.printStackTrace();
         }
 
         try{
             zoo.nouveauVisiteur();
         }catch (LimiteVisiteurException e){
-            System.out.println(e);
+            e.printStackTrace();
         }
 
         System.out.println(zoo);
