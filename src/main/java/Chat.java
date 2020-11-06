@@ -1,5 +1,9 @@
 public class Chat extends Animal{
 
+    /**
+     *
+     * @param nomAnimal nom du chat
+     */
     public Chat(String nomAnimal) {
         super(nomAnimal, TypeAnimal.CHAT);
     }

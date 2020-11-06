@@ -35,7 +35,7 @@ public class TestApp {
 
     }
 
-    public void addVisiteurs(Zoo zoo, int n) throws LimiteVisiteurException {
+    private void addVisiteurs(Zoo zoo, int n) throws LimiteVisiteurException {
         for(int i=0; i < n; i++){
             zoo.nouveauVisiteur();
         }

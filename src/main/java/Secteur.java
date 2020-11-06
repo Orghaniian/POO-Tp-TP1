@@ -1,19 +1,39 @@
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ *Secteur de zoo contenant des {@link Animal} du même {@link TypeAnimal}
+ */
 public class Secteur {
     private TypeAnimal typeAnimauxDansSecteur;
-    private List<Animal> animauxDansSecteur = new ArrayList<Animal>();
+    private List<Animal> animauxDansSecteur = new ArrayList<>();
 
+
+    /**
+     * @param typeAnimauxDansSecteur type d'animal dans le secteur
+     */
     public Secteur(TypeAnimal typeAnimauxDansSecteur) {
         this.typeAnimauxDansSecteur = typeAnimauxDansSecteur;
     }
 
+    /**
+     *
+     * @param typeAnimauxDansSecteur type d'animal dans le secteur
+     * @param animauxDansSecteur liste d'animaux dans le secteur
+     */
     public Secteur(TypeAnimal typeAnimauxDansSecteur, List<Animal> animauxDansSecteur) {
         this(typeAnimauxDansSecteur);
         this.animauxDansSecteur = animauxDansSecteur;
     }
 
+    /**
+     * Ajoute un animal dans le secteur
+     * L'animal doit avoir le même {@link TypeAnimal} que le secteur
+     *
+     * @param animal animal à ajouter
+     * @throws AnimalDansMauvaisSecteurException le type de m'animal ne correspond pas à celui du secteur
+     */
     public void ajouterAnimal(Animal animal) throws AnimalDansMauvaisSecteurException {
         if (animal.getTypeAnimal() == typeAnimauxDansSecteur){
             animauxDansSecteur.add(animal);
@@ -21,13 +41,24 @@ public class Secteur {
 
     }
 
+    /**
+     * Retourne le nombnre d'{@link Animal} dans le secteur
+     *
+     * @return nombre d'animaux dans le secteur
+     */
     public int getNombreAnimaux(){
         return animauxDansSecteur.size();
     }
 
+    /**
+     * Retourne le {@link TypeAnimal} du secteur
+     *
+     * @return type d'animal du secteur
+     */
     public TypeAnimal obtenirType(){
         return typeAnimauxDansSecteur;
     }
+
 
     @Override
     public String toString() {

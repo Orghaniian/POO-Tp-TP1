@@ -1,5 +1,9 @@
 public class Chien extends Animal{
 
+    /**
+     *
+     * @param nomAnimal nom du chien
+     */
     public Chien(String nomAnimal) {
         super(nomAnimal, TypeAnimal.CHIEN);
     }

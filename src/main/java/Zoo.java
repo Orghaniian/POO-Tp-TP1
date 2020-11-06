@@ -1,9 +1,12 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *Zoo accueillant des {@link #visiteurs} et contenant des {@link Secteur} d'{@link Animal}
+ */
 public class Zoo {
     private int visiteurs;
-    private List<Secteur> secteursAnimaux = new ArrayList<Secteur>();
+    private List<Secteur> secteursAnimaux = new ArrayList<>();
 
     public final static int LimiteVisiteur = 15;
 
