@@ -1,9 +1,0 @@
-animal\Chien.class
-animal\TypeAnimal.class
-exception\LimiteVisiteurException.class
-Secteur.class
-App.class
-animal\Animal.class
-animal\Chat.class
-Zoo.class
-exception\AnimalDansMauvaisSecteurException.class
