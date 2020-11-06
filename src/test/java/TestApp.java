@@ -44,11 +44,11 @@ public class TestApp {
     @Test
     public void testAnimalBonSecteur(){
         Zoo zoo = new Zoo();
-        zoo.ajouterSecteur(TypeAnimal.CHAT);
+        zoo.ajouterSecteur(TypeAnimal.CHIEN);
         Throwable e = null;
 
         try{
-            zoo.nouvelAnimal(new Chat("minou"));
+            zoo.nouvelAnimal(new Chien("medor"));
         }catch (Throwable ex){
             e =ex;
         }
