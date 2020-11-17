@@ -129,27 +129,32 @@ public class Interacteur {
         }
     }
 
-    public void start() {
+    private int Menu() {
         int reponse = 0;
+        System.out.println("----------------MENU----------------");
+        System.out.println(zoo.getNom() + ": Que souhaitez-vous faire ? \n"
+                + "1: Créer un nouveau Zoo \n"
+                + "2: Ajouter un nouveau secteur \n"
+                + "3: Inscrire un nouvel animal \n"
+                + "4: Renommer votre Zoo \n"
+                + "5: Afficher zoo \n"
+                + "6: Sauvegarder dans un fichier XML \n"
+                + "7: Charger un zoo\n"
+                + "-1: Arrêter le programme");
+
+        System.out.print("Votre choix: ");
+        try {
+            reponse = Integer.parseInt(br.readLine());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return reponse;
+    }
+
+    public void start() {
+        int reponse;
         do{
-            System.out.println("----------------MENU----------------");
-            System.out.println(zoo.getNom() + ": Que souhaitez-vous faire ? \n"
-                    + "1: Créer un nouveau Zoo \n"
-                    + "2: Ajouter un nouveau secteur \n"
-                    + "3: Inscrire un nouvel animal \n"
-                    + "4: Renommer votre Zoo \n"
-                    + "5: Afficher zoo \n"
-                    + "6: Sauvegarder dans un fichier XML \n"
-                    + "7: Charger un zoo\n"
-                    + "-1: Arrêter le programme");
-
-            System.out.print("Votre choix: ");
-            try {
-                reponse = Integer.parseInt(br.readLine());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
+            reponse = Menu();
             switch (reponse) {
                 case 1:
                     System.out.println("nouveau zoo");
@@ -178,4 +183,6 @@ public class Interacteur {
             }
         }while (reponse != -1);
     }
+
+
 }
