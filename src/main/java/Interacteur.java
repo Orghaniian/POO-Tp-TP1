@@ -22,37 +22,54 @@ public class Interacteur {
         logger.trace("Nouvel Interacteur : " + this);
     }
 
+    private String getString(String question) throws IOException {
+        String reponse;
+        do {
+            System.out.println(question);
+            System.out.print(">");
+            reponse = br.readLine();
+        } while (reponse == null);
+        return reponse;
+    }
+
+    private TypeAnimal getTypeAnimal() {
+        TypeAnimal type = null;
+        do{
+            try {
+                type = TypeAnimal.valueOf(getString("Quelle est l'espèce ?").toUpperCase());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }catch (IllegalArgumentException e){
+                System.out.println("espèce inconnue");
+            }
+        }while(type == null);
+        return type;
+    }
+
     private void nouveauZoo(){
         System.out.println("----------------NOUVEAU ZOO----------------");
-        System.out.println("Quel est le nom du nouveau Zoo ?");
-        System.out.print(">");
         try {
-            zoo = new Zoo(br.readLine());
+            zoo = new Zoo(getString("Quel est le nom du nouveau Zoo ?"));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     private void nouveauSecteur(){
-        TypeAnimal type = null;
         System.out.println("----------------NOUVEAU SECTEUR----------------");
-        type = getTypeAnimal(type);
+        TypeAnimal type = getTypeAnimal();
         zoo.ajouterSecteur(type);
     }
 
     private void nouvelAnimal() {
         String nom = null;
-        TypeAnimal type = null;
         System.out.println("----------------NOUVEL ANIMAL----------------");
-        type = getTypeAnimal(type);
-        do{
-            System.out.print("Quel est le nom de l'animal: ");
-            try {
-                nom = br.readLine();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }while(nom == null);
+        TypeAnimal type = getTypeAnimal();
+        try {
+            nom = getString("Quel est le nom de l'animal ?");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         switch (type){
             case CHIEN:
@@ -64,27 +81,10 @@ public class Interacteur {
         }
     }
 
-    private TypeAnimal getTypeAnimal(TypeAnimal type) {
-        do{
-            System.out.println("Quelle est l'espèce:");
-            System.out.print("Espèce: ");
-            try {
-                type = TypeAnimal.valueOf(br.readLine().toUpperCase());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }catch (IllegalArgumentException e){
-                System.out.println("espèce inconnue");
-            }
-        }while(type == null);
-        return type;
-    }
-
     private void renommerZoo(){
         System.out.println("----------------RENOMMER LE ZOO----------------");
-        System.out.println("Quel nom voulez-vous donner au zoo ?");
-        System.out.print("Nouveau nom: ");
         try {
-            zoo.setNom(br.readLine());
+            zoo.setNom(getString("Quel nom voulez-vous donner au zoo ?"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -102,16 +102,6 @@ public class Interacteur {
             System.out.println("Erreur de saisie");
             e.printStackTrace();
         }
-    }
-
-    private String getString(String question) throws IOException {
-        String path;
-        do {
-            System.out.println(question);
-            System.out.print(">");
-            path = br.readLine();
-        } while (path == null);
-        return path;
     }
 
     private void charger() {
