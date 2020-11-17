@@ -36,17 +36,7 @@ public class Interacteur {
     private void nouveauSecteur(){
         TypeAnimal type = null;
         System.out.println("----------------NOUVEAU SECTEUR----------------");
-        do{
-            System.out.println("Quelle est l'espèce à mettre dans le secteur ?");
-            System.out.print("Espèce: ");
-            try {
-                type = TypeAnimal.valueOf(br.readLine().toUpperCase());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }catch (IllegalArgumentException e){
-                System.out.println("espèce inconnue");
-            }
-        }while(type == null);
+        type = getTypeAnimal(type);
         zoo.ajouterSecteur(type);
     }
 
@@ -54,17 +44,7 @@ public class Interacteur {
         String nom = null;
         TypeAnimal type = null;
         System.out.println("----------------NOUVEL ANIMAL----------------");
-        do{
-            System.out.print("Quelle est l'espèce de l'animal: ");
-            try {
-                type = TypeAnimal.valueOf(br.readLine().toUpperCase());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }catch (IllegalArgumentException e){
-                System.out.println("espèce inconnue");
-            }
-        }while(type == null);
-
+        type = getTypeAnimal(type);
         do{
             System.out.print("Quel est le nom de l'animal: ");
             try {
@@ -84,6 +64,21 @@ public class Interacteur {
         }
     }
 
+    private TypeAnimal getTypeAnimal(TypeAnimal type) {
+        do{
+            System.out.println("Quelle est l'espèce:");
+            System.out.print("Espèce: ");
+            try {
+                type = TypeAnimal.valueOf(br.readLine().toUpperCase());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }catch (IllegalArgumentException e){
+                System.out.println("espèce inconnue");
+            }
+        }while(type == null);
+        return type;
+    }
+
     private void renommerZoo(){
         System.out.println("----------------RENOMMER LE ZOO----------------");
         System.out.println("Quel nom voulez-vous donner au zoo ?");
@@ -96,15 +91,10 @@ public class Interacteur {
     }
 
     private void sauvegarder() {
-        String name = null;
         System.out.println("----------------SAUVEGARDE----------------");
         try {
-            do{
-                System.out.println("Veuillez choisir un nom pour le fichier ?");
-                System.out.print(">");
-                name = br.readLine();
-            }while (name == null);
-            zoo.sauvegarder("output/"+name);
+            String path = getString("Veuillez choisir un nom pour le fichier:");
+            zoo.sauvegarder("output/"+path);
         } catch (FileNotFoundException e) {
             System.out.println("Sauvegarde échouée");
             e.printStackTrace();
@@ -114,15 +104,20 @@ public class Interacteur {
         }
     }
 
+    private String getString(String question) throws IOException {
+        String path;
+        do {
+            System.out.println(question);
+            System.out.print(">");
+            path = br.readLine();
+        } while (path == null);
+        return path;
+    }
+
     private void charger() {
-        String path = null;
         System.out.println("----------------SAUVEGARDE----------------");
         try {
-            do{
-                System.out.println("Charger un fichier:");
-                System.out.print(">");
-                path = br.readLine();
-            }while(path == null);
+            String path = getString("Charger un fichier:");
             zoo = Zoo.charger(path);
         } catch (IOException e) {
             e.printStackTrace();
@@ -183,6 +178,4 @@ public class Interacteur {
             }
         }while (reponse != -1);
     }
-
-
 }
