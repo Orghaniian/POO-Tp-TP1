@@ -37,7 +37,7 @@ public class Interacteur {
         TypeAnimal type = null;
         System.out.println("----------------NOUVEAU SECTEUR----------------");
         do{
-            System.out.println("Quel est l'espèce à mettre dans le secteur ?");
+            System.out.println("Quelle est l'espèce à mettre dans le secteur ?");
             System.out.print("Espèce: ");
             try {
                 type = TypeAnimal.valueOf(br.readLine().toUpperCase());
@@ -96,7 +96,6 @@ public class Interacteur {
     }
 
     private void sauvegarder() {
-        XStream xstream = new XStream();
         String name = null;
         System.out.println("----------------SAUVEGARDE----------------");
         try {
@@ -105,12 +104,27 @@ public class Interacteur {
                 System.out.print(">");
                 name = br.readLine();
             }while (name == null);
-            xstream.toXML(zoo, new FileOutputStream(new File("output/"+name+".xml")));
+            zoo.sauvegarder("output/"+name);
         } catch (FileNotFoundException e) {
             System.out.println("Sauvegarde échouée");
             e.printStackTrace();
         } catch (IOException e) {
             System.out.println("Erreur de saisie");
+            e.printStackTrace();
+        }
+    }
+
+    private void charger() {
+        String path = null;
+        System.out.println("----------------SAUVEGARDE----------------");
+        try {
+            do{
+                System.out.println("Charger un fichier:");
+                System.out.print(">");
+                path = br.readLine();
+            }while(path == null);
+            zoo = Zoo.charger(path);
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -128,6 +142,7 @@ public class Interacteur {
                     + "4: Renommer votre Zoo \n"
                     + "5: Afficher zoo \n"
                     + "6: Sauvegarder dans un fichier XML \n"
+                    + "7: Charger un zoo\n"
                     + "-1: Arrêter le programme");
 
             System.out.print("Votre choix: ");
@@ -156,11 +171,18 @@ public class Interacteur {
                     break;
                 case 6:
                     sauvegarder();
+                    break;
+                case 7:
+                    charger();
+                    break;
+
                 default:
                     break;
             }
         }while (reponse != -1);
     }
+
+
 
 
 }

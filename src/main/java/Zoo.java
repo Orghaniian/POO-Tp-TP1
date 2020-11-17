@@ -1,10 +1,12 @@
 import animal.Animal;
 import animal.TypeAnimal;
+import com.thoughtworks.xstream.XStream;
 import exception.AnimalDansMauvaisSecteurException;
 import exception.LimiteVisiteurException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,6 +74,20 @@ public class Zoo {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public void sauvegarder(String chemin) throws FileNotFoundException {
+        XStream xstream = new XStream();
+        xstream.toXML(this, new FileOutputStream(new File(chemin + ".xml")));
+    }
+
+    public static Zoo charger(String chemin) throws IOException {
+        FileInputStream file;
+        XStream xstream = new XStream();
+        file = new FileInputStream(chemin);
+        Zoo zoo = (Zoo) xstream.fromXML(file);
+        file.close();
+        return zoo;
     }
 
     @Override
