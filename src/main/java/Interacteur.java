@@ -130,8 +130,6 @@ public class Interacteur {
     }
 
     public void start() {
-
-
         int reponse = 0;
         do{
             System.out.println("----------------MENU----------------");
@@ -175,14 +173,9 @@ public class Interacteur {
                 case 7:
                     charger();
                     break;
-
                 default:
                     break;
             }
         }while (reponse != -1);
     }
-
-
-
-
 }
