@@ -1,28 +1,22 @@
+import animal.Animal;
 import animal.Chat;
 import animal.Chien;
 import animal.TypeAnimal;
 import exception.AnimalDansMauvaisSecteurException;
 import exception.LimiteVisiteurException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.Scanner;
 
 public class App {
+    private static final Logger logger =
+            LogManager. getLogger ( App.class );
 
     public static void main(String[] args) {
-        Zoo zoo = new Zoo();
-        zoo.ajouterSecteur(TypeAnimal.CHAT);
-        try{
-            zoo.nouvelAnimal(new Chat("minou"));
-            zoo.nouvelAnimal(new Chien("Medor"));
-        }catch (AnimalDansMauvaisSecteurException e){
-            e.printStackTrace();
-        }
+        logger.trace("Demarrage de l'application");
 
-        try{
-            zoo.nouveauVisiteur();
-        }catch (LimiteVisiteurException e){
-            e.printStackTrace();
-        }
-
-        System.out.println(zoo);
-
+        Interacteur interacteur = new Interacteur();
+        interacteur.start();
     }
 }

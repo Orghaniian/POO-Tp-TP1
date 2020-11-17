@@ -1,6 +1,8 @@
 import animal.Animal;
 import animal.TypeAnimal;
 import exception.AnimalDansMauvaisSecteurException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,9 +11,12 @@ import java.util.List;
 /**
  *Secteur de zoo contenant des {@link Animal} du même {@link TypeAnimal}
  */
-public class Secteur {
+public class Secteur implements Comparable<Secteur>{
     private TypeAnimal typeAnimauxDansSecteur;
     private List<Animal> animauxDansSecteur = new ArrayList<>();
+
+    private static final Logger logger =
+            LogManager. getLogger ( Secteur.class );
 
 
     /**
@@ -19,6 +24,7 @@ public class Secteur {
      */
     public Secteur(TypeAnimal typeAnimauxDansSecteur) {
         this.typeAnimauxDansSecteur = typeAnimauxDansSecteur;
+        logger.trace("Nouveau Secteur : " + this);
     }
 
     /**
@@ -70,5 +76,10 @@ public class Secteur {
                 "typeAnimauxDansSecteur=" + typeAnimauxDansSecteur +
                 ", animauxDansSecteur=" + animauxDansSecteur +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Secteur o) {
+        return getNombreAnimaux() - o.getNombreAnimaux();
     }
 }

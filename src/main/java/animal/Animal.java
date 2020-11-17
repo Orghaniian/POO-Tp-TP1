@@ -1,8 +1,14 @@
 package animal;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public abstract class Animal {
     private String nomAnimal;
     private TypeAnimal typeAnimal;
+
+    private static final Logger logger =
+            LogManager. getLogger ( Animal.class );
 
     /**
      *
@@ -12,6 +18,7 @@ public abstract class Animal {
     public Animal(String nomAnimal, TypeAnimal typeAnimal) {
         this.nomAnimal = nomAnimal;
         this.typeAnimal = typeAnimal;
+        logger.trace("Nouvel animal : " + this);
     }
 
     /**
