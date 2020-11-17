@@ -76,16 +76,17 @@ public class Zoo {
         this.nom = nom;
     }
 
-    public void sauvegarder(String chemin) throws FileNotFoundException {
+    public void sauvegarder(String chemin) throws IOException {
         XStream xstream = new XStream();
-        xstream.toXML(this, new FileOutputStream(new File(chemin + ".xml")));
+        FileOutputStream file = new FileOutputStream(new File(chemin + ".xml"));
+        xstream.toXML(this, file);
+        file.close();
     }
 
     public static Zoo charger(String chemin) throws IOException {
         FileInputStream file;
-        XStream xstream = new XStream();
         file = new FileInputStream(chemin);
-        Zoo zoo = (Zoo) xstream.fromXML(file);
+        Zoo zoo = (Zoo) new XStream().fromXML(file);
         file.close();
         return zoo;
     }
